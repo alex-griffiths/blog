@@ -1,0 +1,15 @@
+name: deploy-changes
+on: 
+  push:
+    branches:
+      - "main"
+jobs:
+  install-and-run-open-tofu:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: opentofu/setup-opentofu@v1
+        with:
+          tofu_version: 1.6.0
+      - run: tofu init
+      - id: plan
+        run: tofu plan -no-color
