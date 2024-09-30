@@ -1,5 +1,5 @@
 use actix_web::dev::Server;
-use actix_web::{web, App, HttpServer};
+use actix_web::{web, App, HttpServer, Responder};
 use std::net::TcpListener;
 use tracing_actix_web::TracingLogger;
 
@@ -36,10 +36,15 @@ impl Application {
     }
 }
 
+pub async fn root() -> impl Responder {
+    "Hello, blog!"
+}
+
 pub fn run(listener: TcpListener) -> Result<Server, std::io::Error> {
     let server: Server = HttpServer::new(move || {
         App::new()
             .wrap(TracingLogger::default())
+            .route("/", web::get().to(root))
             .route("/health_check", web::get().to(health_check))
     })
     .listen(listener)?
