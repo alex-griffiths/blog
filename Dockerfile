@@ -20,7 +20,7 @@ ENV SQLX_OFFLINE true
 RUN cargo build --release --bin blog
 
 # Runtime stage
-from debian:bullseye-slim as runtime
+from debian:trixie-slim as runtime
 
 WORKDIR /app
 
