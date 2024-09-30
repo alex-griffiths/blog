@@ -1,5 +1,5 @@
 # Builder stage
-FROM lukemathwalker/cargo-chef:latest-rust-1.63.0 as chef
+FROM lukemathwalker/cargo-chef as chef
 
 WORKDIR /app
 RUN apt update && apt install lld clang -y
